@@ -1,0 +1,188 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+h1,h2,h3,h4,h5,h6,span,p{
+    margin: 0;
+    padding: 0;
+}
+
+.stade {
+    background-image: url(/src/assets/img/stadium_background.webp);
+    background-size: cover;
+    background-position: center;
+    width: 100%;
+   
+}
+
+.reserve {
+    background-color: blueviolet;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.reserve div {
+    background: rgb(234, 9, 167);
+    height: 60px;
+    margin-bottom: 10px;
+    display: flex;
+    width: 60px;
+    margin: auto 0;
+}
+
+.attaque, .milieu, .defense, .garde {
+    margin-bottom: 10px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+   
+}
+
+.attaque .card-imag, .milieu .card-imag, .defense  .card-imag, .garde  .card-imag {
+    background-image: url(/src/assets/img/badge_gold.webp);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 18vw; 
+    aspect-ratio: 252 / 350;
+    margin: auto;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s ease;
+   
+}
+.attaque .card-imag:hover, .milieu .card-imag:hover, .defense .card-imag:hover, .garde .card-imag:hover {
+    transform: scale(1.1);
+    border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(203, 228, 17, 0.509);
+    filter: drop-shadow( 0 10px 10px rgba(17, 228, 186, 0.509))
+}
+.card-imag{
+   display: flex;
+   align-items: center;
+   flex-direction: column;
+   position: relative;
+}
+.card-imag-jouer{
+        background-image: url(/src/assets/img/MESSI-removebg-preview.png);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        text-align: center;
+        width: auto; 
+        height: 50%; 
+        aspect-ratio: 1 / 1;
+        margin-top:20% ;
+}
+.position-number{
+    display: flex;
+    height: 35px;
+    margin-top: 15%;
+    margin-right: 80%;
+    flex-direction: column;
+}
+.position-number .number{
+    font-size: 1.4vw;
+  font-weight:900 ;
+}
+.position-number .position{
+    font-size: 1.2vw;
+  font-weight:900 ;
+}
+.nom-jouer h5{
+    font-size: 8px;
+}
+.pac-sho-pas-dri-def-phy{
+    display: flex;
+    gap: 4px;
+}
+.condition-physique{
+    display: flex;
+    flex-direction: column;
+   align-items: center;
+}
+.condition-physique-nom{
+    font-size:1vw;
+   color: rgb(17, 15, 15);
+}
+.condition-physique-nomber{
+    font-size: 1.2vw;
+    font-weight: 700;
+}
+.les-drapeau{
+    display: flex;
+    justify-content: center;
+    width: 85%;
+}
+.les-drapeau div{
+    width: 30%;
+   
+    display: flex;
+    justify-content: center;
+    
+}
+.les-drapeau div img{
+    width: 50%;
+    border-radius: 20%;
+}
+
+.formul {
+    background-color: rgba(0, 0, 0, 0.769);
+    padding: 20px;
+    border-radius: 20px;
+    position: absolute;
+    top: 20px; 
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 80%; 
+    color: #fff;
+    display: none;
+  }
+ #player-form{
+    display: grid;
+    grid-template-columns:repeat(2,1fr); 
+    gap: 10px; 
+    padding: 10px;
+ }
+  .form-group {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .form-group label {
+    margin-bottom: 10px;
+  }
+  .form-group input,
+  .form-group select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 90%;
+    margin-bottom: 10px;
+  }
+  .les-button{
+    display: flex;
+    justify-content: center;
+  }
+  
+  button {
+   
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px;
+    width: 100px;
+  }
+  
+  button:hover {
+    background: #06e311;
+  }
+  
