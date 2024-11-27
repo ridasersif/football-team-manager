@@ -15,22 +15,6 @@ h1,h2,h3,h4,h5,h6,span,p{
    
 }
 
-.reserve {
-    background-color: blueviolet;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
-
-.reserve div {
-    background: rgb(234, 9, 167);
-    height: 60px;
-    margin-bottom: 10px;
-    display: flex;
-    width: 60px;
-    margin: auto 0;
-}
 
 .attaque, .milieu, .defense, .garde {
     margin-bottom: 10px;
@@ -50,14 +34,26 @@ h1,h2,h3,h4,h5,h6,span,p{
     display: flex;
     cursor: pointer;
     position: relative;
-    transition: 0.3s ease;
-   
+    transition: 0.3s ease;  
 }
+.garde  .card-imag {
+    background-image: url(/src/assets/img/badge_ballon_dor.webp);
+    color: #ccc;
+}
+
 .attaque .card-imag:hover, .milieu .card-imag:hover, .defense .card-imag:hover, .garde .card-imag:hover {
     transform: scale(1.1);
     border-radius: 10px;
     box-shadow: 0 10px 10px rgba(203, 228, 17, 0.509);
     filter: drop-shadow( 0 10px 10px rgba(17, 228, 186, 0.509))
+}
+.garde  .card-imag:hover {
+   
+    transform: scale(1.1);
+    border-radius: 10px;
+    box-shadow: 0 10px 10px rgba(228, 17, 151, 0.509);
+    filter: drop-shadow( 0 10px 10px rgba(228, 77, 17, 0.509))
+    
 }
 .card-imag{
    display: flex;
@@ -66,7 +62,7 @@ h1,h2,h3,h4,h5,h6,span,p{
    position: relative;
 }
 .card-imag-jouer{
-        background-image: url(/src/assets/img/MESSI-removebg-preview.png);
+        background-image: url();
         background-size: contain;
         background-repeat: no-repeat;
         background-position: center;
@@ -165,14 +161,16 @@ h1,h2,h3,h4,h5,h6,span,p{
     width: 90%;
     margin-bottom: 10px;
   }
-  .les-button{
+  .button-and{
     display: flex;
-    justify-content: center;
+    justify-content:center;
+    gap: 10px;
+  }
+  .button-start{
+    display: flex;
   }
   
-  button {
-   
-    background: #4caf50;
+  .button-and button {
     color: #fff;
     border: none;
     border-radius: 5px;
@@ -180,9 +178,66 @@ h1,h2,h3,h4,h5,h6,span,p{
     cursor: pointer;
     padding: 8px;
     width: 100px;
+
   }
-  
-  button:hover {
+  #btnAddJoueur{
+    background-color: #007906;
+  }
+  #btnAddJoueur:hover {
     background: #06e311;
   }
+  #btnDeleteJoueur{
+    background-color: #e30000;
+  }
+  #btnDeleteJoueur:hover {
+    background: #ff3333;
+  }
+  #btnUpdetJoueur{
+    background-color: #0a0079;
+  }
+  #btnUpdetJoueur:hover {
+    background-color: #1d39c6;
+  }
+ 
+  .reserve {
+    background-color: blueviolet;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+  #btnHideForm {
+   
+    background: #a40a0a;
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 16px;
+    cursor: pointer;
+    padding: 8px;
+    width: 40px;
+    height: 40px;
+  }
   
+  #btnHideForm:hover {
+    background: #ff0202;
+  }
+  .reserve {
+    background-color: blueviolet;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+
+.reserve div {
+    background: rgb(234, 9, 167);
+    height: 60px;
+    margin-bottom: 10px;
+    display: flex;
+    width: 60px;
+    margin: auto 0;
+}
+
+ 
