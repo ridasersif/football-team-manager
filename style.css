@@ -65,7 +65,7 @@ h1,h2,h3,h4,h5,h6,span,p{
   overflow-y: hidden; 
   border: 2px solid #ccc; 
   padding: 10px;
-  background-color: #d22b2b;
+  background-image: linear-gradient(to right,red ,blue);
   scroll-behavior: smooth;
   margin: 0 auto;
   scrollbar-width: none;
@@ -88,7 +88,7 @@ h1,h2,h3,h4,h5,h6,span,p{
 .reserve .card-imag:hover {
   transform: scale(1.1);
   border-radius: 10px;
-  box-shadow: 0 10px 10px rgba(203, 228, 17, 0.509);
+  box-shadow: 0 10px 10px rgba(3, 240, 50, 0);
   filter: drop-shadow( 0 10px 10px rgba(17, 228, 186, 0.509))
 }
 
@@ -261,6 +261,21 @@ h1,h2,h3,h4,h5,h6,span,p{
   width: 100%;
   background-color: #0a00793a;
  
+ 
+}
+.remplacant{
+  display: flex;
+  flex-direction: column;
+
+}
+#AjoutRemplacant{
+  padding: 10px;
+  margin: 5px auto;
+  width: 93%;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  
 }
 
  

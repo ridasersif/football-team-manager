@@ -32,7 +32,6 @@ function openForm(event) {
 
        inputNom.value = currentCard.querySelector(".nom-jouer h5").textContent;
        inputPhoto.value = currentCard.querySelector(".card-imag-jouer").style.backgroundImage;
-        console.log( inputPhoto.value) 
        inputNationality.value = currentCard.querySelector(".drapeau-natiolnalite img").src;
        inputLogo.value = currentCard.querySelector(".drapeau-flag img").src;
        inputRating.value = currentCard.querySelector(".number").textContent;
@@ -103,4 +102,112 @@ function deleteJoueur(){
        statsElements[4].textContent='';
        statsElements[5].textContent='';
        hideForm()
+     
 }
+////****************************  *  *  *  *   */
+let drag=null;
+let afterDrag=null;
+let cardPlayersPrancipal=document.querySelectorAll('.card')
+
+function dragPlayerReserv(){
+    let cardPlayersReserv = document.querySelectorAll('.cardPlayerReserv');
+    cardPlayersReserv.forEach(cardPlayerReserv => {
+        cardPlayerReserv.addEventListener('dragstart', function() {
+            console.log('dragstart')
+            drag= cardPlayerReserv;
+            cardPlayerReserv.style.opacity='0.3';
+        });
+        cardPlayerReserv.addEventListener('dragend', function() { 
+            console.log('dragend')
+            drag=null;
+            cardPlayerReserv.style.opacity='1';
+        });
+        cardPlayersPrancipal.forEach(cardPlayerPrancipal=>{
+            cardPlayerPrancipal.addEventListener('dragover',function(e){
+                e.preventDefault()
+              
+            })
+            cardPlayerPrancipal.addEventListener('dragleave',function(){
+                console.log("dragleave")
+            })
+            cardPlayerPrancipal.addEventListener('drop',function(){
+           // afterDrag.append(this)
+            this.innerHTML=""
+            this.append(drag)
+           // drag.append(afterDrag)
+
+                // this.append(drag)
+                // console.log(this)
+                // drag.append(afterDrag)
+                // console.log(drag)
+                // afterDrag.append(this)
+                // console.log(afterDrag)
+            })
+        
+        })
+
+    });
+}
+function AjoutRemplacant(){
+    formul.style.display = "block";
+   
+}
+
+
+fetch('players.json')
+  .then((response) => response.json())
+  .then((players) => {
+  
+    for (let player of players.players) {
+        let content = `
+        <div onclick="openForm(event)" class="card-imag cardPlayerReserv" draggable="true">
+            <div class="card-imag-jouer" style="background-image: url(${player.photo});">
+                <div class="position-number">
+                    <span class="number">${player.rating}</span>
+                    <span class="position">${player.position}</span>
+                </div>
+            </div>
+            <div class="nom-jouer">
+                <h5>${player.name}</h5>
+            </div>
+            <div class="pac-sho-pas-dri-def-phy">
+                <div class="condition-physique">
+                    <p class="condition-physique-nom">PAC</p>
+                    <p class="condition-physique-nomber">${player.pace}</p>
+                </div>
+                <div class="condition-physique">
+                    <p class="condition-physique-nom">HSO</p>
+                    <p class="condition-physique-nomber">${player.shooting}</p>
+                </div>
+                <div class="condition-physique">
+                    <p class="condition-physique-nom">PAS</p>
+                    <p class="condition-physique-nomber">${player.passing}</p>
+                </div>
+                <div class="condition-physique">
+                    <p class="condition-physique-nom">DRI</p>
+                    <p class="condition-physique-nomber">${player.dribbling}</p>
+                </div>
+                <div class="condition-physique">
+                    <p class="condition-physique-nom">DEF</p>
+                    <p class="condition-physique-nomber">${player.defending}</p>
+                </div>
+                <div class="condition-physique">
+                    <p class="condition-physique-nom">PHY</p>
+                    <p class="condition-physique-nomber">${player.physical}</p>
+                </div>
+            </div>
+            <div class="les-drapeau">
+                <div class="drapeau-natiolnalite">
+                    <img src="${player.flag}" alt="">
+                </div>
+                <div class="drapeau-flag">
+                    <img src="${player.logo}" alt="">
+                </div>
+            </div>
+        </div>
+        `;
+        document.getElementById("reserve").innerHTML += content;
+    }
+    dragPlayerReserv();
+  });
+  
