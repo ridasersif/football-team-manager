@@ -17,20 +17,22 @@ let inputDefending = document.getElementById("defending");
 let inputPhysical = document.getElementById("physical");
 
 function openForm(event) {
+    document.getElementById("feckDiv").style.zIndex="1"
+    
     currentCard = event.currentTarget;
     if ( currentCard.querySelector(".nom-jouer h5").textContent=='') {
        document.getElementById('btnUpdetJoueur').style.display="none"
        document.getElementById('btnDeleteJoueur').style.display="none"
-        document.getElementById('btnAddJoueur').style.display="block"
+       document.getElementById('btnAddJoueur').style.display="block"
 
-        
     }else{
-        document.getElementById('btnUpdetJoueur').style.display="block"
+       document.getElementById('btnUpdetJoueur').style.display="block"
        document.getElementById('btnDeleteJoueur').style.display="block"
        document.getElementById('btnAddJoueur').style.display="none"
 
        inputNom.value = currentCard.querySelector(".nom-jouer h5").textContent;
-       inputPhoto.value = currentCard.querySelector(".card-imag-jouer").style.backgroundImage.slice(5, -2);
+       inputPhoto.value = currentCard.querySelector(".card-imag-jouer").style.backgroundImage;
+        console.log( inputPhoto.value) 
        inputNationality.value = currentCard.querySelector(".drapeau-natiolnalite img").src;
        inputLogo.value = currentCard.querySelector(".drapeau-flag img").src;
        inputRating.value = currentCard.querySelector(".number").textContent;
@@ -48,8 +50,9 @@ function openForm(event) {
 function hideForm(){
     formul.style.display = "none";
     document.getElementById("player-form").reset();
+     document.getElementById("feckDiv").style.zIndex="-1"
 }
-if(i=20)
+
 function addJoueur() {
     let statsElements = currentCard.querySelectorAll(".condition-physique-nomber");
     if (!inputNom.value || !inputPhoto.value
@@ -83,12 +86,21 @@ function addJoueur() {
 }
 function updetJoueur(){
     addJoueur()
-    hideForm()
-
 }
 
 function deleteJoueur(){
-    currentCard.querySelector(".nom-jouer h5").textContent=''
-    formul.style.display = "none";
-    document.getElementById("player-form").reset();
+       currentCard.querySelector(".nom-jouer h5").textContent='';
+       currentCard.querySelector(".card-imag-jouer").style.backgroundImage= `url()`;
+       currentCard.querySelector(".drapeau-natiolnalite img").src;
+       currentCard.querySelector(".drapeau-flag img").src="";
+       currentCard.querySelector(".number").textContent='';
+
+       let statsElements = currentCard.querySelectorAll(".condition-physique-nomber");
+       statsElements[0].textContent='';
+       statsElements[1].textContent='';
+       statsElements[2].textContent='';
+       statsElements[3].textContent='';
+       statsElements[4].textContent='';
+       statsElements[5].textContent='';
+       hideForm()
 }

@@ -1,6 +1,7 @@
 body {
     margin: 0;
     padding: 0;
+    position: relative;
 }
 h1,h2,h3,h4,h5,h6,span,p{
     margin: 0;
@@ -17,7 +18,6 @@ h1,h2,h3,h4,h5,h6,span,p{
 
 
 .attaque, .milieu, .defense, .garde {
-    margin-bottom: 10px;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -55,6 +55,43 @@ h1,h2,h3,h4,h5,h6,span,p{
     filter: drop-shadow( 0 10px 10px rgba(228, 77, 17, 0.509))
     
 }
+.reserve {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 90%; 
+ 
+  overflow-x: auto; 
+  overflow-y: hidden; 
+  border: 2px solid #ccc; 
+  padding: 10px;
+  background-color: #d22b2b;
+  scroll-behavior: smooth;
+  margin: 0 auto;
+  scrollbar-width: none;
+}
+
+
+.reserve .card-imag {
+  background-image: url(/src/assets/img/badge_gold.webp);
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 18vw; 
+    aspect-ratio: 252 / 350;
+    margin: auto;
+    display: flex;
+    cursor: pointer;
+    position: relative;
+    transition: 0.3s ease; 
+    flex-shrink: 0;
+}
+.reserve .card-imag:hover {
+  transform: scale(1.1);
+  border-radius: 10px;
+  box-shadow: 0 10px 10px rgba(203, 228, 17, 0.509);
+  filter: drop-shadow( 0 10px 10px rgba(17, 228, 186, 0.509))
+}
+
 .card-imag{
    display: flex;
    align-items: center;
@@ -125,6 +162,7 @@ h1,h2,h3,h4,h5,h6,span,p{
 }
 
 .formul {
+    z-index: 100;
     background-color: rgba(0, 0, 0, 0.769);
     padding: 20px;
     border-radius: 20px;
@@ -199,13 +237,6 @@ h1,h2,h3,h4,h5,h6,span,p{
     background-color: #1d39c6;
   }
  
-  .reserve {
-    background-color: blueviolet;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-}
   #btnHideForm {
    
     background: #a40a0a;
@@ -222,22 +253,15 @@ h1,h2,h3,h4,h5,h6,span,p{
   #btnHideForm:hover {
     background: #ff0202;
   }
-  .reserve {
-    background-color: blueviolet;
-    height: 100px;
-    display: flex;
-    justify-content: center;
-    gap: 10px;
+#feckDiv{
+  z-index: -1;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: #0a00793a;
+ 
 }
 
-
-.reserve div {
-    background: rgb(234, 9, 167);
-    height: 60px;
-    margin-bottom: 10px;
-    display: flex;
-    width: 60px;
-    margin: auto 0;
-}
-
+ 
  
