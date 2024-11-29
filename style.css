@@ -160,6 +160,12 @@ h1,h2,h3,h4,h5,h6,span,p{
     width: 50%;
     border-radius: 20%;
 }
+.statistiqueJoueur, .statistiqueGarde , .informationJoueur{
+  display: grid;
+  grid-template-columns:repeat(2,1fr); 
+    gap: 10px; 
+    padding: 10px;
+}
 
 .formul {
     z-index: 100;
@@ -175,12 +181,12 @@ h1,h2,h3,h4,h5,h6,span,p{
     color: #fff;
     display: none;
   }
- #player-form{
+ /* #player-form{
     display: grid;
     grid-template-columns:repeat(2,1fr); 
     gap: 10px; 
     padding: 10px;
- }
+ } */
   .form-group {
     display: flex;
     justify-content: center;
