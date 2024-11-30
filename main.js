@@ -26,8 +26,10 @@ let inputPositioning = document.getElementById("positioning");
 
 
 let JoueurText=false;
-
+let x=0;
 function openForm(event) {
+
+   
     document.getElementById("feckDiv").style.zIndex="1"
     
     currentCard = event.currentTarget;
@@ -42,14 +44,13 @@ function openForm(event) {
     else{
         document.getElementById("statistiqueJoueur").style.display="none"
         document.getElementById("statistiqueGarde").style.display="block"
-      
+       JoueurText=false;
     }
 
      if ( currentCard.querySelector(".nom-jouer h5").textContent=='') {
         document.getElementById('btnUpdetJoueur').style.display="none"
         document.getElementById('btnDeleteJoueur').style.display="none"
         document.getElementById('btnAddJoueur').style.display="block"
- 
      }else{
         document.getElementById('btnUpdetJoueur').style.display="block"
         document.getElementById('btnDeleteJoueur').style.display="block"
@@ -90,6 +91,7 @@ function hideForm(){
 }
 
 function addJoueur() {
+    document.getElementById('PositionRemplacant').style.display='none'
     let statsElements = currentCard.querySelectorAll(".condition-physique-nomber");
     if(JoueurText){
         console.log("joueur")
@@ -112,8 +114,10 @@ function addJoueur() {
     let logoElement = currentCard.querySelector(".drapeau-flag img");
     logoElement.src = inputLogo.value;
     let ratingElement = currentCard.querySelector(".number");
+    let selectPosition=document.querySelector('#PositionRemplacant select')
+
+
     ratingElement.textContent = inputRating.value;
-    
     statsElements[0].textContent = inputPace.value;
     statsElements[1].textContent = inputShooting.value;
     statsElements[2].textContent = inputPassing.value;
@@ -148,6 +152,8 @@ function addJoueur() {
     statsElements[4].textContent = inputReflexes.value;
     statsElements[5].textContent = inputPositioning.value;
 
+     
+
 }
   
     hideForm()
@@ -173,7 +179,7 @@ function deleteJoueur(){
        hideForm()
      
 }
-////****************************  *  *  *  *   */
+////*********************************/
 let drag=null;
 
 function dragPlayerReserv() {
@@ -221,32 +227,41 @@ function dragPlayerReserv() {
     });
 }
 
-
-
-
+ 
 function AjoutRemplacant(){
+    x++;
+    if (x!=0) {
+     document.getElementById('PositionRemplacant').style.display='block'
+    
   
     let reserve=document.getElementById('reserve')
     let card=document.getElementById('card').cloneNode(true)
-    console.log(card)
+    let selectPosition=document.querySelector('#PositionRemplacant select')
+    let  selectValue;
+    selectPosition.addEventListener('change',function(){
+        if(selectPosition.value=='GK'){
+            document.getElementById("statistiqueJoueur").style.display="none"
+            document.getElementById("statistiqueGarde").style.display="block" 
+
+           
+        }else{
+            document.getElementById("statistiqueJoueur").style.display="block"
+            document.getElementById("statistiqueGarde").style.display="none"
+             
+        }
+        console.log(selectPosition.value)
+        card.querySelector('.position').textContent= selectPosition.value
+    
+    })
     card.classList.add('cardPlayerReserv')
     card.setAttribute('draggable',"true")
     reserve.appendChild(card)
     document.getElementById
     card.click()
+    }
+    x=0;
    
-
-
 }
-
-
-
-
-
-
-
-
-
 
 fetch('players.json')
   .then((response) => response.json())

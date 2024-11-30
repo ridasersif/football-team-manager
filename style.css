@@ -65,7 +65,7 @@ h1,h2,h3,h4,h5,h6,span,p{
   overflow-y: hidden; 
   border: 2px solid #ccc; 
   padding: 10px;
-  background-image: linear-gradient(to right,red ,blue);
+  background: linear-gradient(135deg, #1C1C1C, #2C3E50);
   scroll-behavior: smooth;
   margin: 0 auto;
   scrollbar-width: none;
@@ -282,6 +282,9 @@ h1,h2,h3,h4,h5,h6,span,p{
   border: none;
   cursor: pointer;
   
+}
+#PositionRemplacant{
+  display: none;
 }
 
  
