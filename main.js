@@ -88,6 +88,7 @@ function hideForm(){
     formul.style.display = "none";
     document.getElementById("player-form").reset();
      document.getElementById("feckDiv").style.zIndex="-1"
+    
 }
 
 function addJoueur() {
@@ -115,7 +116,6 @@ function addJoueur() {
     logoElement.src = inputLogo.value;
     let ratingElement = currentCard.querySelector(".number");
     let selectPosition=document.querySelector('#PositionRemplacant select')
-
 
     ratingElement.textContent = inputRating.value;
     statsElements[0].textContent = inputPace.value;
@@ -210,7 +210,6 @@ function dragPlayerReserv() {
             let targetPosition = this.querySelector('.position')?.textContent.trim();
 
             if (draggedPosition === targetPosition) {
-                console.log(`Position matched: ${draggedPosition}`);
                 let droppedCard = this.firstElementChild;
                 if (droppedCard) {
                     let parentOfDraggedCard = drag.parentElement;
@@ -221,13 +220,35 @@ function dragPlayerReserv() {
                     this.append(drag);
                 }
             } else {
-                console.log(`Position mismatch: Cannot place ${draggedPosition} in ${targetPosition}`);
+                
+                let positionDiv=document.getElementById('positionDiv');
+                positionDiv.innerHTML=''
+                positionDiv.style.display='block'
+                positionDiv.style.zIndex='2'
+            
+               document.getElementById('feckDiv').style.zIndex='1'
+                console.log(positionDiv)
+                let icon=document.createElement('i')
+                icon.classList.add('fa-solid','fa-triangle-exclamation');
+                let paragraphPosition=document.createElement('p');
+                paragraphPosition.innerHTML=`Erreur de position: impossible de placer ${draggedPosition} en ${targetPosition}`
+                let btnTestPosition=document.createElement('button');
+                btnTestPosition.setAttribute('onclick','hideElement()')
+                btnTestPosition.textContent='OK';
+                positionDiv.appendChild(icon)
+                positionDiv.appendChild( paragraphPosition);
+                positionDiv.appendChild( btnTestPosition);
+                console.log(positionDiv)
+               
             }
         });
     });
 }
+function hideElement(){ 
+    document.getElementById('positionDiv').style.display='none' 
+    document.getElementById('feckDiv').style.zIndex='-1'     
+} 
 
- 
 function AjoutRemplacant(){
     x++;
     if (x!=0) {
@@ -261,64 +282,111 @@ function AjoutRemplacant(){
     }
     x=0;
    
+   
 }
 
 fetch('players.json')
   .then((response) => response.json())
   .then((players) => {
-  
     for (let player of players.players) {
-       
-        let content = `
-        <div onclick="openForm(event)" class="card-imag cardPlayerReserv" draggable="true">
-            <div class="card-imag-jouer" style="background-image: url(${player.photo});">
-                <div class="position-number">
-                    <span class="number">${player.rating}</span>
-                    <span class="position">${player.position}</span>
-                </div>
-            </div>
-            <div class="nom-jouer">
-                <h5>${player.name}</h5>
-            </div>
-            <div class="pac-sho-pas-dri-def-phy">
-                <div class="condition-physique">
-                    <p class="condition-physique-nom">${player.pace ? 'PAC': 'DIV'}</p>
-                    <p class="condition-physique-nomber">${player.pace ?? player.diving}</p>
-                </div>
-                <div class="condition-physique">
-                    <p class="condition-physique-nom">${player.shooting ? 'HSO': 'HAN'}</p>
-                    <p class="condition-physique-nomber">${player.shooting ?? player.handling}</p>
-                </div>
-                <div class="condition-physique">
-                    <p class="condition-physique-nom">${player.shooting ? 'PAS': 'KIC'}</p>
-                    <p class="condition-physique-nomber">${player.passing ?? player.kicking}</p>
-                </div>
-                <div class="condition-physique">
-                    <p class="condition-physique-nom">${player.shooting ? 'DRI': 'REF'}</p>
-                    <p class="condition-physique-nomber">${player.dribbling ?? player.reflexes}</p>
-                </div>
-                <div class="condition-physique">
-                    <p class="condition-physique-nom">${player.shooting ? 'DEF': 'SPE'}</p>
-                    <p class="condition-physique-nomber">${player.defending ?? player.speed}</p>
-                </div>
-                <div class="condition-physique">
-                    <p class="condition-physique-nom">${player.shooting ? 'PHY': 'POS'}</p>
-                    <p class="condition-physique-nomber">${player.physical ?? player.positioning}</p>
-                </div>
-            </div>
-            <div class="les-drapeau">
-                <div class="drapeau-natiolnalite">
-                    <img src="${player.flag}" alt="">
-                </div>
-                <div class="drapeau-flag">
-                    <img src="${player.logo}" alt="">
-                </div>
-            </div>
-        </div>
-        `;
-        document.getElementById("reserve").innerHTML += content;
+     
+      let card = document.createElement('div');
+      card.classList.add('card-imag', 'cardPlayerReserv');
+      card.setAttribute('draggable', 'true');
+      card.setAttribute('onclick', 'openForm(event)');
+      
+      
+      let cardImage = document.createElement('div');
+      cardImage.classList.add('card-imag-jouer');
+      cardImage.style.backgroundImage = `url(${player.photo})`;
+
+      let positionNumber = document.createElement('div');
+      positionNumber.classList.add('position-number');
+
+      let number = document.createElement('span');
+      number.classList.add('number');
+      number.textContent = player.rating;
+
+      let position = document.createElement('span');
+      position.classList.add('position');
+      position.textContent = player.position;
+      
+      positionNumber.appendChild(number);
+      positionNumber.appendChild(position);
+      cardImage.appendChild(positionNumber);
+
+      
+      let playerName = document.createElement('div');
+      playerName.classList.add('nom-jouer');
+
+      let playerNameText = document.createElement('h5');
+      playerNameText.textContent = player.name;
+
+      playerName.appendChild(playerNameText);
+
+      
+      let statsContainer = document.createElement('div');
+      statsContainer.classList.add('pac-sho-pas-dri-def-phy');
+
+      const stats = [
+        { name: player.pace ? 'PAC' : 'DIV', value: player.pace ?? player.diving },
+        { name: player.shooting ? 'SHO' : 'HAN', value: player.shooting ?? player.handling },
+        { name: player.passing ? 'PAS' : 'KIC', value: player.passing ?? player.kicking },
+        { name: player.dribbling ? 'DRI' : 'REF', value: player.dribbling ?? player.reflexes },
+        { name: player.defending ? 'DEF' : 'SPE', value: player.defending ?? player.speed },
+        { name: player.physical ? 'PHY' : 'POS', value: player.physical ?? player.positioning },
+      ];
+
+      stats.forEach((stat) => {
+        let statDiv = document.createElement('div');
+        statDiv.classList.add('condition-physique');
+
+        let statName = document.createElement('p');
+        statName.classList.add('condition-physique-nom');
+        statName.textContent = stat.name;
+
+        let statValue = document.createElement('p');
+        statValue.classList.add('condition-physique-nomber');
+        statValue.textContent = stat.value;
+
+        statDiv.appendChild(statName);
+        statDiv.appendChild(statValue);
+        statsContainer.appendChild(statDiv);
+      });
+
+      
+      let flagsContainer = document.createElement('div');
+      flagsContainer.classList.add('les-drapeau');
+
+      let nationalityFlag = document.createElement('div');
+      nationalityFlag.classList.add('drapeau-natiolnalite');
+
+      let nationalityImg = document.createElement('img');
+      nationalityImg.setAttribute('src', player.flag);
+      nationalityFlag.appendChild(nationalityImg);
+
+      let clubFlag = document.createElement('div');
+      clubFlag.classList.add('drapeau-flag');
+
+      let clubImg = document.createElement('img');
+      clubImg.setAttribute('src', player.logo);
+      clubFlag.appendChild(clubImg);
+
+      flagsContainer.appendChild(nationalityFlag);
+      flagsContainer.appendChild(clubFlag);
+
+      
+      card.appendChild(cardImage);
+      card.appendChild(playerName);
+      card.appendChild(statsContainer);
+      card.appendChild(flagsContainer);
+
+      
+      document.getElementById('reserve').appendChild(card);
     }
+
     dragPlayerReserv();
   });
 
-  
+
+
