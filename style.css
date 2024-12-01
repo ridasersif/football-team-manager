@@ -40,14 +40,18 @@ h1,h2,h3,h4,h5,h6,span,p{
     background-image: url(/src/assets/img/badge_ballon_dor.webp);
     color: #ccc;
 }
+.garde  .card-imag .pac-sho-pas-dri-def-phy .condition-physique .condition-physique-nom {
+    color: #ccc;
+}
 
 .attaque .card-imag:hover, .milieu .card-imag:hover, .defense .card-imag:hover, .garde .card-imag:hover {
     transform: scale(1.1);
     border-radius: 10px;
-    box-shadow: 0 10px 10px rgba(203, 228, 17, 0.509);
-    filter: drop-shadow( 0 10px 10px rgba(17, 228, 186, 0.509))
+    box-shadow: 0 10px 10px rgba(255, 215, 0, 0.5); 
+    filter: drop-shadow(0 10px 10px rgba(65, 105, 225, 0.5));
+
 }
-.garde  .card-imag:hover {
+.garde  .card-imag:hover  {
    
     transform: scale(1.1);
     border-radius: 10px;
@@ -274,15 +278,27 @@ h1,h2,h3,h4,h5,h6,span,p{
   flex-direction: column;
 
 }
-#AjoutRemplacant{
-  padding: 10px;
-  margin: 5px auto;
-  width: 93%;
-  border-radius: 10px;
-  border: none;
-  cursor: pointer;
-  
+#AjoutRemplacant {
+  padding: 15px 20px; 
+  margin: 10px auto; 
+  width: 90%; 
+  border-radius: 12px; 
+  border: none; 
+  cursor: pointer; 
+  background: linear-gradient(135deg, #1C1C1C, #2C3E50);
+  color: #ffffff; 
+  font-size: 1.2rem; 
+  text-align: center; 
+  transition: all 0.3s ease;
 }
+
+#AjoutRemplacant:hover {
+  transform: scale(1.05); 
+  box-shadow: ( 0 10px 10px rgba(17, 228, 186, 0.509));
+ 
+}
+
+
 #PositionRemplacant{
   display: none;
 }

@@ -28,12 +28,15 @@ let inputPositioning = document.getElementById("positioning");
 let JoueurText=false;
 let x=0;
 function openForm(event) {
-
+     if (x==0) {
+     document.getElementById('PositionRemplacant').style.display='none'
+     }
+  
    
     document.getElementById("feckDiv").style.zIndex="1"
     
     currentCard = event.currentTarget;
-    console.log( currentCard)
+   
     if(currentCard.querySelector(".position-number .position").textContent!='GK'){
        document.getElementById("statistiqueJoueur").style.display="block"
        document.getElementById("statistiqueGarde").style.display="none" 
@@ -70,7 +73,7 @@ function openForm(event) {
             inputDribbling.value = statsElements[3].textContent;
             inputDefending.value = statsElements[4].textContent;
             inputPhysical.value = statsElements[5].textContent;
-            console.log("joueur")
+            
          }else{
             inputDiving .value = statsElements[0].textContent;
             inputHandling.value = statsElements[1].textContent;
@@ -78,11 +81,13 @@ function openForm(event) {
             inputReflexes.value = statsElements[3].textContent;
             inputSpeed.value = statsElements[4].textContent;
             inputPositioning.value = statsElements[5].textContent;
-            console.log("garde")
+           
          }
       
      }
     formul.style.display = "block";
+
+  
 }
 function hideForm(){
     formul.style.display = "none";
@@ -92,10 +97,9 @@ function hideForm(){
 }
 
 function addJoueur() {
-    document.getElementById('PositionRemplacant').style.display='none'
     let statsElements = currentCard.querySelectorAll(".condition-physique-nomber");
     if(JoueurText){
-        console.log("joueur")
+
     if (!inputNom.value || !inputPhoto.value
         || !inputNationality.value || !inputLogo.value
         || !inputRating.value || !inputPace.value 
@@ -103,6 +107,11 @@ function addJoueur() {
         || !inputDribbling.value || !inputDefending.value 
         || !inputPhysical.value) {
         alert("Veuillez compléter tous les champs.");
+        x++;
+        if (x!=0) {
+         document.getElementById('PositionRemplacant').style.display='block'
+         x=0;
+        }
         return;
     }
    
@@ -132,6 +141,7 @@ function addJoueur() {
         || !inputReflexes.value || !inputSpeed.value 
         || !inputPositioning.value) {
         alert("Veuillez compléter tous les champs.");
+       
         return;
     }
     let playerNameElement = currentCard.querySelector(".nom-jouer h5");
@@ -152,10 +162,8 @@ function addJoueur() {
     statsElements[4].textContent = inputReflexes.value;
     statsElements[5].textContent = inputPositioning.value;
 
-     
-
 }
-  
+
     hideForm()
 }
 function updetJoueur(){
@@ -176,6 +184,9 @@ function deleteJoueur(){
        statsElements[3].textContent='';
        statsElements[4].textContent='';
        statsElements[5].textContent='';
+      if( currentCard.classList.contains('cardPlayerReserv')){
+        currentCard.remove()
+      }
        hideForm()
      
 }
@@ -190,6 +201,7 @@ function dragPlayerReserv() {
         cardPlayerReserv.addEventListener('dragstart', function () {
             drag = cardPlayerReserv;
             cardPlayerReserv.style.opacity = '0.3';
+
         });
 
         cardPlayerReserv.addEventListener('dragend', function () {
@@ -206,8 +218,8 @@ function dragPlayerReserv() {
         cardPlayerPrancipal.addEventListener('drop', function () {
             if (!drag) return; 
 
-            let draggedPosition = drag.querySelector('.position').textContent.trim();
-            let targetPosition = this.querySelector('.position')?.textContent.trim();
+            let draggedPosition = drag.querySelector('.position').textContent;
+            let targetPosition = this.querySelector('.position')?.textContent;
 
             if (draggedPosition === targetPosition) {
                 let droppedCard = this.firstElementChild;
@@ -227,7 +239,6 @@ function dragPlayerReserv() {
                 positionDiv.style.zIndex='2'
             
                document.getElementById('feckDiv').style.zIndex='1'
-                console.log(positionDiv)
                 let icon=document.createElement('i')
                 icon.classList.add('fa-solid','fa-triangle-exclamation');
                 let paragraphPosition=document.createElement('p');
@@ -254,11 +265,12 @@ function AjoutRemplacant(){
     if (x!=0) {
      document.getElementById('PositionRemplacant').style.display='block'
     
-  
     let reserve=document.getElementById('reserve')
     let card=document.getElementById('card').cloneNode(true)
+    card.removeAttribute('id')
+    card.classList.remove('card')
     let selectPosition=document.querySelector('#PositionRemplacant select')
-    let  selectValue;
+    
     selectPosition.addEventListener('change',function(){
         if(selectPosition.value=='GK'){
             document.getElementById("statistiqueJoueur").style.display="none"
@@ -270,19 +282,17 @@ function AjoutRemplacant(){
             document.getElementById("statistiqueGarde").style.display="none"
              
         }
-        console.log(selectPosition.value)
+     
+        
         card.querySelector('.position').textContent= selectPosition.value
-    
     })
+   
     card.classList.add('cardPlayerReserv')
     card.setAttribute('draggable',"true")
-    reserve.appendChild(card)
-    document.getElementById
     card.click()
+    reserve.appendChild(card)    
     }
-    x=0;
-   
-   
+   x=0;
 }
 
 fetch('players.json')
@@ -293,9 +303,7 @@ fetch('players.json')
       let card = document.createElement('div');
       card.classList.add('card-imag', 'cardPlayerReserv');
       card.setAttribute('draggable', 'true');
-      card.setAttribute('onclick', 'openForm(event)');
-      
-      
+      card.setAttribute('onclick', 'openForm(event)'); 
       let cardImage = document.createElement('div');
       cardImage.classList.add('card-imag-jouer');
       cardImage.style.backgroundImage = `url(${player.photo})`;
@@ -387,6 +395,7 @@ fetch('players.json')
 
     dragPlayerReserv();
   });
+  console.log("fin")
 
 
 
