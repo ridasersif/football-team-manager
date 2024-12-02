@@ -180,7 +180,7 @@ function deleteJoueur(){
        let statsElements = currentCard.querySelectorAll(".condition-physique-nomber");
        statsElements[0].textContent='';
        statsElements[1].textContent='';
-       statsElements[2].textContent='';
+       statsElements[2].textContent='';                               
        statsElements[3].textContent='';
        statsElements[4].textContent='';
        statsElements[5].textContent='';
@@ -222,13 +222,17 @@ function dragPlayerReserv() {
             let targetPosition = this.querySelector('.position')?.textContent;
 
             if (draggedPosition === targetPosition) {
-                let droppedCard = this.firstElementChild;
-                if (droppedCard) {
+
+                let droppedCard = this.children[0]
+                console.log(droppedCard.children[0].children[0])
+                if (droppedCard.children[0].children[0].textContent!='') {
                     let parentOfDraggedCard = drag.parentElement;
                     this.innerHTML = "";
                     this.append(drag);
                     parentOfDraggedCard.append(droppedCard);
+
                 } else {
+                    this.innerHTML = "";
                     this.append(drag);
                 }
             } else {
@@ -268,7 +272,6 @@ function AjoutRemplacant(){
     let reserve=document.getElementById('reserve')
     let card=document.getElementById('card').cloneNode(true)
     card.removeAttribute('id')
-    card.classList.remove('card')
     let selectPosition=document.querySelector('#PositionRemplacant select')
     
     selectPosition.addEventListener('change',function(){
@@ -282,7 +285,6 @@ function AjoutRemplacant(){
             document.getElementById("statistiqueGarde").style.display="none"
              
         }
-     
         
         card.querySelector('.position').textContent= selectPosition.value
     })
@@ -299,8 +301,7 @@ fetch('players.json')
   .then((response) => response.json())
   .then((players) => {
     for (let player of players.players) {
-     
-      let card = document.createElement('div');
+      let card = document.createElement('div'); 
       card.classList.add('card-imag', 'cardPlayerReserv');
       card.setAttribute('draggable', 'true');
       card.setAttribute('onclick', 'openForm(event)'); 
