@@ -25,31 +25,29 @@ let inputSpeed = document.getElementById("speed");
 let inputPositioning = document.getElementById("positioning");
 
 
-let JoueurText=false;
+let JoueurTest=false;
 let x=0;
 function openForm(event) {
      if (x==0) {
      document.getElementById('PositionRemplacant').style.display='none'
      }
-  
-   
     document.getElementById("feckDiv").style.zIndex="1"
     
     currentCard = event.currentTarget;
-   
+   console.log(currentCard)
     if(currentCard.querySelector(".position-number .position").textContent!='GK'){
        document.getElementById("statistiqueJoueur").style.display="block"
        document.getElementById("statistiqueGarde").style.display="none" 
-       JoueurText=true;  
+       JoueurTest=true;  
      
     }
    
     else{
         document.getElementById("statistiqueJoueur").style.display="none"
         document.getElementById("statistiqueGarde").style.display="block"
-       JoueurText=false;
+       JoueurTest=false;
     }
-
+    
      if ( currentCard.querySelector(".nom-jouer h5").textContent=='') {
         document.getElementById('btnUpdetJoueur').style.display="none"
         document.getElementById('btnDeleteJoueur').style.display="none"
@@ -66,7 +64,7 @@ function openForm(event) {
         inputRating.value = currentCard.querySelector(".number").textContent;
  
         let statsElements = currentCard.querySelectorAll(".condition-physique-nomber");
-        if(JoueurText){
+        if(JoueurTest){
             inputPace.value = statsElements[0].textContent;
             inputShooting.value = statsElements[1].textContent;
             inputPassing.value = statsElements[2].textContent;
@@ -86,8 +84,7 @@ function openForm(event) {
       
      }
     formul.style.display = "block";
-
-  
+    
 }
 function hideForm(){
     formul.style.display = "none";
@@ -98,7 +95,7 @@ function hideForm(){
 
 function addJoueur() {
     let statsElements = currentCard.querySelectorAll(".condition-physique-nomber");
-    if(JoueurText){
+    if(JoueurTest){
 
     if (!inputNom.value || !inputPhoto.value
         || !inputNationality.value || !inputLogo.value
@@ -222,9 +219,10 @@ function dragPlayerReserv() {
             let targetPosition = this.querySelector('.position')?.textContent;
 
             if (draggedPosition === targetPosition) {
-
+                  
                 let droppedCard = this.children[0]
-                console.log(droppedCard.children[0].children[0])
+                console.log(this)
+                console.log(droppedCard)
                 if (droppedCard.children[0].children[0].textContent!='') {
                     let parentOfDraggedCard = drag.parentElement;
                     this.innerHTML = "";
@@ -390,13 +388,13 @@ fetch('players.json')
       card.appendChild(statsContainer);
       card.appendChild(flagsContainer);
 
-      
+
       document.getElementById('reserve').appendChild(card);
     }
 
     dragPlayerReserv();
   });
-  console.log("fin")
+ 
 
 
 
